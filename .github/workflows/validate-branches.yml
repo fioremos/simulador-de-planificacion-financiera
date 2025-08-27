@@ -1,31 +1,15 @@
-name: Validate PR Source Branch
+name: Test PR Check
 
 on:
-  pull_request:
-    branches:
-      - main
-      - develop
+  pull_request:   # Se ejecuta en cualquier PR
 
 jobs:
-  validate-branch:
-    name: Validate PR Source Branch
+  test:
+    name: Test PR Check
     runs-on: ubuntu-latest
     steps:
-      - name: Validate source branch
+      - name: Show PR info
         run: |
           echo "Base branch: ${{ github.base_ref }}"
-          echo "Source branch: ${{ github.head_ref }}"
-
-          # Validar PR hacia main
-          if [[ "${{ github.base_ref }}" == "main" && "${{ github.head_ref }}" != "develop" ]]; then
-            echo "❌ PR hacia main solo puede venir desde develop."
-            exit 1
-          fi
-
-          # Validar PR hacia develop
-          if [[ "${{ github.base_ref }}" == "develop" && "${{ github.head_ref }}" != feature/* ]]; then
-            echo "❌ PR hacia develop solo puede venir desde feature/*."
-            exit 1
-          fi
-
-          echo "✅ Validación pasada. Rama permitida."
+          echo "Head branch: ${{ github.head_ref }}"
+          echo "Este check sirve para que aparezca en la lista de status checks"
