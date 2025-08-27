@@ -8,6 +8,7 @@ on:
 
 jobs:
   validate-branch:
+    name: Validate PR Source Branch
     runs-on: ubuntu-latest
     steps:
       - name: Validate source branch
